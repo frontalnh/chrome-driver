@@ -26,9 +26,9 @@ function repeatedlyRequestImgTranslate(index, imgUrls) {
   xhr = new XMLHttpRequest()
 
   // 이거는 크롬 익스텐션 디렉토리에서 바로 가져올때.
-  // xhr.open("POST", chrome.extension.getURL('https:// 118.33.41.101:8081'), true)
+  // xhr.open("POST", chrome.extension.getURL('https:// 127.0.0.1:8081'), true)
 
-  xhr.open("POST", 'https:// 118.33.41.101:8081/', true)
+  xhr.open("POST", 'https:// 127.0.0.1:8081/', true)
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.send(JSON.stringify({
     index,
