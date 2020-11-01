@@ -3,7 +3,7 @@
   "version": "1.0",
   "description": "Build an Extension!",
   "permissions": [
-    "https://127.0.0.1:8081/*",
+    "https://13.125.232.150:8081/*",
     "https://toptoon.com/*",
     "activeTab",
     "declarativeContent",
