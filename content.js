@@ -4,31 +4,35 @@ let imgs = []
 const imgUrls = []
 
 try {
-  imgs = document.getElementsByTagName('table')[0].getElementsByTagName('img')
-  for (let img of imgs) {
+  // 모든 이미지 요소 저장
+  imgs = document.getElementsByTagName('img')
+  for (let i = 0; i < imgs.length; i++) {
+    const img = imgs[i]
+    // console.log(img.width, img.height)
     const url = img.getAttribute('src')
-    if (url.includes('ep_content')) {
-      imgUrls.push(url)
+    // 이미지 요소를 외부에서 가져오고 크기가 500이상인 경우만 번역하기 인덱스랑 같이 저장
+    if (img.width > 500 && url.startsWith('http')) {
+      imgUrls.push({ index: i, url })
     }
   }
-} catch { }
+} catch (err) { console.log(err) }
 
 
 console.log('Image urls: ', imgUrls)
 
 let xhr
 
-function repeatedlyRequestImgTranslate(index, imgUrls) {
+function repeatedlyRequestImgTranslate(imgUrls) {
   if (imgUrls.length == 0) return
 
-  const url = imgUrls.shift()
+  const { index, url } = imgUrls.shift()
   console.log('Processing img: ', url)
   xhr = new XMLHttpRequest()
 
   // 이거는 크롬 익스텐션 디렉토리에서 바로 가져올때.
-  // xhr.open("POST", chrome.extension.getURL('https://13.125.232.150:8081'), true)
+  // xhr.open("POST", chrome.extension.getURL('https://118.33.41.203:8081'), true)
 
-  xhr.open("POST", 'https://13.125.232.150:8081/', true)
+  xhr.open("POST", 'https://118.33.41.203:8081/', true)
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.send(JSON.stringify({
     index,
@@ -41,7 +45,7 @@ function repeatedlyRequestImgTranslate(index, imgUrls) {
       const translatedImgUrl = xhr.responseText
       console.log(xhr.responseText)
       imgs[index].src = translatedImgUrl
-      return repeatedlyRequestImgTranslate(index + 1, imgUrls)
+      return repeatedlyRequestImgTranslate(imgUrls)
     }
   }
 }
@@ -51,7 +55,7 @@ chrome.runtime.onMessage.addListener(
     try {
       console.log(req)
       if (req.message == 'StartTranslate') {
-        repeatedlyRequestImgTranslate(0, imgUrls)
+        repeatedlyRequestImgTranslate(imgUrls)
         sendResponse({ message: "TranslationStarted" })
       } else if (req.message == 'StopTranslate') {
         xhr.abort()

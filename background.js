@@ -18,9 +18,9 @@ chrome.runtime.onInstalled.addListener(function () {
           css: ["img"]
         }),
         // img 태그가 있으면 액션 활성화 시킨다.
-        // new chrome.declarativeContent.PageStateMatcher({
-        //   css: ["img"]
-        // })
+        new chrome.declarativeContent.PageStateMatcher({
+          css: ["img"]
+        })
       ],
       actions: [
         new chrome.declarativeContent.ShowPageAction(),

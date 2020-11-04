@@ -3,7 +3,7 @@
   "version": "1.0",
   "description": "Build an Extension!",
   "permissions": [
-    "https://13.125.232.150:8081/*",
+    "https://118.33.41.203:8081/*",
     "https://toptoon.com/*",
     "activeTab",
     "declarativeContent",
@@ -18,10 +18,10 @@
   "page_action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "images/get_started16.png",
-      "32": "images/get_started32.png",
-      "48": "images/get_started48.png",
-      "128": "images/get_started128.png"
+      "16": "images/logo.png",
+      "32": "images/logo.png",
+      "48": "images/logo.png",
+      "128": "images/logo.png"
     }
   },
   "content_scripts": [
@@ -36,10 +36,10 @@
     }
   ],
   "icons": {
-    "16": "images/get_started16.png",
-    "32": "images/get_started32.png",
-    "48": "images/get_started48.png",
-    "128": "images/get_started128.png"
+    "16": "images/logo.png",
+    "32": "images/logo.png",
+    "48": "images/logo.png",
+    "128": "images/logo.png"
   },
   "manifest_version": 2
 }
